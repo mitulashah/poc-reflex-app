@@ -14,6 +14,8 @@ You'll need a valid OpenAI subscription - save your API key under the environmen
 export OPENAI_API_KEY="YOUR_OPENAI_API_KEY" # replace me!
 ```
 
+## Option 1: Local Development
+
 ### 🧬 1. Clone the Repo
 
 ```bash
@@ -42,6 +44,37 @@ Initialize and run the app:
 reflex init
 reflex run
 ```
+
+## Option 2: Using GitHub Codespaces
+
+This repository is configured to work with GitHub Codespaces, allowing you to develop in the cloud without setting up a local environment.
+
+### 1. Open in Codespaces
+
+Click the "Code" button on the GitHub repository page and select "Open with Codespaces".
+
+### 2. Set Up Environment Variables
+
+Once your codespace is running, set your OpenAI API key:
+
+```bash
+export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+```
+
+For persistent storage of your API key in Codespaces, you can add it to your Codespaces secrets:
+1. Go to GitHub.com
+2. Navigate to Settings > Codespaces
+3. Add a new secret with name `OPENAI_API_KEY` and your API key as the value
+
+### 3. Run the Application
+
+The development container will automatically install dependencies. To run the app:
+
+```bash
+run-reflex-app
+```
+
+The app will be available on port 3000, which Codespaces will automatically forward for you.
 
 # Features
 

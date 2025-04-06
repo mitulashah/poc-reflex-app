@@ -1,0 +1,26 @@
+name: Reflex App Development Environment
+
+environment:
+  # Use a medium-sized machine to provide a good balance of performance and cost
+  image: mcr.microsoft.com/devcontainers/universal:2-linux
+  machine_type: standardLinux
+  
+  # Pre-build settings
+  prebuild:
+    # Create prebuild for the main branch
+    master: true
+    # Also create prebuilds for pull requests (speeds up development)
+    pull_requests: true
+    # Reduce prebuild storage usage by only keeping the latest
+    max_prebuild_age: 1
+    
+  # Port forwarding settings
+  ports:
+    - port: 3000
+      visibility: public
+      description: "Reflex App"
+      
+  # Configure memory and CPU settings for the Codespace
+  resources:
+    memory: 4gb
+    cores: 2
