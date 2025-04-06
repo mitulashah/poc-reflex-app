@@ -1,25 +1,32 @@
-name: Prebuild Codespaces
+name: Setup Codespace Environment
 
 on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '0 0 * * 0'  # Weekly prebuild refresh
+    - cron: '0 0 * * 0'  # Weekly run on Sundays at midnight
 
 jobs:
-  prebuild:
-    name: Create Codespaces Prebuild
+  setup-environment:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Codespaces environment
-        uses: github/codespaces-precache@v1
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          cache-steps: |
-            - name: Install dependencies
-              run: pip install -r requirements.txt && reflex init
+          python-version: '3.11'
+          cache: 'pip'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Initialize Reflex environment
+        run: |
+          reflex init
+          
+      # This primes the environment but actual prebuilds are configured in repository settings
+      # See: https://docs.github.com/en/codespaces/prebuilding-your-codespaces/configuring-prebuilds
