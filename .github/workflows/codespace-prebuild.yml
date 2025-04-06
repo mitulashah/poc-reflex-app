@@ -8,9 +8,18 @@ on:
 
 jobs:
   prebuild:
+    name: Create Codespaces Prebuild
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: github/codespaces-prebuild@v1
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Codespaces environment
+        uses: github/codespaces-precache@v1
         with:
-          prebuild-command: pip install -r requirements.txt && reflex init
+          cache-steps: |
+            - name: Install dependencies
+              run: pip install -r requirements.txt && reflex init
